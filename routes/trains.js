@@ -104,6 +104,8 @@ function createTrainsCallback(trains) {
     // Process the list of trains
     result.Object.Results.forEach(function(item) {
 
+      console.log(item);   // remove this log once we know the ProgramManager and Theme fields names
+
       // Append the train to the list
       var train = new Train({ Name: item.Name });
       trains.add( train );
@@ -138,6 +140,12 @@ router.get('/:name', function(req, res) {
 
   //console.log(trains.findWhere({ Name: req.params.name }).get('teams').toJSON());
 
+  // Retrieve the Programm Manager
+  var ProgramManager = trains.findWhere({ Name: req.params.name }).get('ProgramManager').toJSON();
+  console.log('*********');
+  console.log('ProgramManager: ');
+  console.log(ProgramManager);
+
   // Convert Team collection to an object readable by template
   var teams = {};
   trains.findWhere({ Name: req.params.name }).get('teams').forEach(function(team) {
@@ -149,6 +157,7 @@ router.get('/:name', function(req, res) {
   res.render('train',
     {
       name: req.params.name,
+      ProgramManager: ProgramManager,
       train: trains.findWhere({ Name: req.params.name }).get('teams').toJSON(),
       teams: teams,
     });

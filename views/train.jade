@@ -2,6 +2,10 @@ extends layout
 
 block content
   h1 #{name}:
+  p Program Manager:
+    img(src='http://wwwin.cisco.com/dir/photo/std/#{ProgramManager.username}.jpg')
+    a(href='http://wwwin-tools.cisco.com/dir/details/#{ProgramManager.username}') #{ProgramManager.DisplayName}
+
   p Teams:
   ul
     each team in train
